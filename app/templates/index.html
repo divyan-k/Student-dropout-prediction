@@ -1,0 +1,475 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Student Dropout Early-Warning Intelligence System</title>
+  <link rel="stylesheet" href="/static/style.css">
+  <script>
+    (function() {
+      const saved = localStorage.getItem('theme');
+      if (saved === 'dark' || (!saved && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
+        document.documentElement.setAttribute('data-theme', 'dark');
+      } else {
+        document.documentElement.setAttribute('data-theme', 'light');
+      }
+    })();
+  </script>
+</head>
+<body>
+  <div class="app-shell">
+    <!-- Slim Rail Sidebar (Dark Forest Slate) -->
+    <aside class="sidebar-rail">
+      <div class="sidebar-top">
+        <a href="/" class="sidebar-logo" title="Student Risk Intelligence System">
+          🎓
+        </a>
+        <nav class="sidebar-menu">
+          <a href="/" class="sidebar-icon-btn active" title="Dropout Risk Evaluation Workspace">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="7" height="9"/><rect x="14" y="3" width="7" height="5"/><rect x="14" y="12" width="7" height="9"/><rect x="3" y="16" width="7" height="5"/></svg>
+          </a>
+          <a href="/about" class="sidebar-icon-btn" title="Model Methodology & Technical Architecture">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"/><path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"/></svg>
+          </a>
+          <button type="button" class="sidebar-icon-btn" onclick="document.getElementById('preset-high-risk').click()" title="High Risk Preset Shortcut">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg>
+          </button>
+          <a href="#results-content" class="sidebar-icon-btn" title="SHAP Feature Drivers">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><circle cx="12" cy="12" r="6"/><circle cx="12" cy="12" r="2"/></svg>
+          </a>
+        </nav>
+      </div>
+
+      <div class="sidebar-bottom">
+        <a href="/about" class="sidebar-icon-btn" title="System Documentation & Reference">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>
+        </a>
+        <div class="sidebar-avatar" title="Academic Advisor Workspace">
+          👨‍🏫
+          <span class="online-indicator"></span>
+        </div>
+      </div>
+    </aside>
+
+    <!-- Main Workspace Container -->
+    <div class="workspace-container">
+      <!-- Top Navigation Header -->
+      <header class="topbar">
+        <div class="topbar-left">
+          <h1 class="topbar-title">Student Risk Intelligence</h1>
+          <a href="/about" class="topbar-subtitle">← Multi-Stage Model Architecture (Random Forest CV 0.886 AUC)</a>
+        </div>
+
+        <div class="topbar-right">
+          <!-- Night Mode / Day Mode Toggle -->
+          <button id="theme-toggle" class="btn-theme-toggle" type="button" aria-label="Toggle Night Mode" title="Toggle Night Mode">
+            <span class="theme-icon">🌙</span>
+            <span class="theme-text">Night Mode</span>
+          </button>
+        </div>
+      </header>
+
+      <!-- Two-Column Split Body -->
+      <div class="workspace-split">
+        <!-- Subnav / Step Progress Column -->
+        <aside class="subnav-sidebar">
+          <!-- Completion Progress Widget -->
+          <div class="completion-widget">
+            <div class="completion-header">
+              <span class="completion-label">
+                Completion <span class="info-dot" title="Active model stage completion percentage">ⓘ</span>
+              </span>
+              <span id="completion-percentage" class="completion-val">33%</span>
+            </div>
+            <div class="completion-track">
+              <div id="completion-progress-bar" class="completion-fill" style="width: 33%;"></div>
+            </div>
+          </div>
+
+          <!-- Subnav Menu List -->
+          <nav class="subnav-list">
+            <a href="#stage1-card" class="subnav-item active" id="subnav-s1">
+              <div class="subnav-item-left">
+                <span>📋</span>
+                <span>Admission Info</span>
+              </div>
+              <span class="subnav-check checked" id="check-s1">✓</span>
+            </a>
+            <a href="#stage2-card" class="subnav-item" id="subnav-s2">
+              <div class="subnav-item-left">
+                <span>📊</span>
+                <span>Semester 1</span>
+              </div>
+              <span class="subnav-check" id="check-s2">✓</span>
+            </a>
+            <a href="#stage3-card" class="subnav-item" id="subnav-s3">
+              <div class="subnav-item-left">
+                <span>📈</span>
+                <span>Semester 2</span>
+              </div>
+              <span class="subnav-check" id="check-s3">✓</span>
+            </a>
+            <a href="#presets-bar" class="subnav-item" id="subnav-presets">
+              <div class="subnav-item-left">
+                <span>⚡</span>
+                <span>Cohort Presets</span>
+              </div>
+              <span style="font-size: 0.72rem; color: var(--text-muted); font-weight: 700;">4</span>
+            </a>
+            <a href="#results-panel" class="subnav-item" id="subnav-results">
+              <div class="subnav-item-left">
+                <span>🎯</span>
+                <span>Risk Findings</span>
+              </div>
+            </a>
+            <a href="/about" class="subnav-item">
+              <div class="subnav-item-left">
+                <span>📖</span>
+                <span>Methodology</span>
+              </div>
+            </a>
+          </nav>
+        </aside>
+
+        <!-- Right Content & Form Area -->
+        <main class="content-scrollable">
+          <!-- Section Banner -->
+          <div class="section-banner">
+            <h2 class="section-banner-title">Student Profile & Risk Assessment</h2>
+            <p class="section-banner-desc">Configure student admission attributes and academic progression records to compute stage-specific dropout probabilities and SHAP risk drivers.</p>
+          </div>
+
+          <!-- Quick Test Presets Bar -->
+          <div class="presets-bar" id="presets-bar">
+            <span class="presets-label">⚡ Cohort Presets:</span>
+            <div class="presets-buttons">
+              <button type="button" class="btn-preset preset-high" id="preset-high-risk" title="Pre-fill student with unpaid fees and failing grades">🚨 High Dropout Risk</button>
+              <button type="button" class="btn-preset" id="preset-medium-risk" title="Pre-fill borderline student with partial approvals">⚠️ Moderate Risk</button>
+              <button type="button" class="btn-preset preset-low" id="preset-low-risk" title="Pre-fill high-achieving student with scholarship">🎓 Safe / High Achiever</button>
+              <button type="button" class="btn-preset preset-reset" id="preset-reset" title="Reset all fields to baseline">🔄 Reset</button>
+            </div>
+          </div>
+
+          <!-- Error Alert Banner -->
+          <div id="error-banner" class="error-banner hidden"></div>
+
+          <!-- Main Input Grid & Results Container -->
+          <div class="grid-layout">
+            <!-- Left Column: Input Form -->
+            <div class="form-container">
+              <form id="prediction-form">
+                <!-- Stage 1 Section: Admission Profile -->
+                <div class="card" id="stage1-card">
+                  <div class="card-header">
+                    <span class="card-title">1. Admission Information</span>
+                    <span id="active-stage-badge" class="badge badge-stage">Stage 1 (Admission)</span>
+                  </div>
+                  <div class="form-grid">
+                    <div class="form-group">
+                      <label for="field-course">Degree Course</label>
+                      <select id="field-course" required></select>
+                    </div>
+                    <div class="form-group">
+                      <label for="field-app-mode">Application Mode</label>
+                      <select id="field-app-mode" required></select>
+                    </div>
+                    <div class="form-group">
+                      <label for="field-admission-grade">Admission Grade <span class="hint">(0-200)</span></label>
+                      <input type="number" id="field-admission-grade" step="0.1" min="0" max="200" required>
+                    </div>
+                    <div class="form-group">
+                      <label for="field-prev-grade">Previous Qualification Grade <span class="hint">(0-200)</span></label>
+                      <input type="number" id="field-prev-grade" step="0.1" min="0" max="200" required>
+                    </div>
+                    <div class="form-group">
+                      <label for="field-age">Age at Enrollment <span class="hint">(15-80)</span></label>
+                      <input type="number" id="field-age" min="15" max="80" required>
+                    </div>
+                    <div class="form-group">
+                      <label for="field-gender">Gender</label>
+                      <select id="field-gender"></select>
+                    </div>
+                    <div class="form-group">
+                      <label for="field-tuition">Tuition Fees Up to Date</label>
+                      <select id="field-tuition"></select>
+                    </div>
+                    <div class="form-group">
+                      <label for="field-debtor">Debtor <span class="hint">(Unpaid Fees)</span></label>
+                      <select id="field-debtor"></select>
+                    </div>
+                    <div class="form-group">
+                      <label for="field-scholarship">Scholarship Holder</label>
+                      <select id="field-scholarship"></select>
+                    </div>
+                    <div class="form-group">
+                      <label for="field-attendance">Attendance Mode</label>
+                      <select id="field-attendance"></select>
+                    </div>
+                  </div>
+
+                  <!-- Advanced Admission Fields Collapsible -->
+                  <a id="toggle-advanced" class="toggle-link">+ Show Advanced Admission Fields</a>
+                  <div id="advanced-fields" class="form-grid hidden">
+                    <div class="form-group">
+                      <label for="field-marital-status">Marital Status</label>
+                      <select id="field-marital-status"></select>
+                    </div>
+                    <div class="form-group">
+                      <label for="field-app-order">Application Order <span class="hint">(1-9)</span></label>
+                      <input type="number" id="field-app-order" min="0" max="9" value="1">
+                    </div>
+                    <div class="form-group">
+                      <label for="field-displaced">Displaced <span class="hint">(Away from Home)</span></label>
+                      <select id="field-displaced"></select>
+                    </div>
+                    <div class="form-group">
+                      <label for="field-special-needs">Educational Special Needs</label>
+                      <select id="field-special-needs"></select>
+                    </div>
+                    <div class="form-group">
+                      <label for="field-international">International Student</label>
+                      <select id="field-international"></select>
+                    </div>
+                    <div class="form-group">
+                      <label for="field-nacionality">Nationality</label>
+                      <select id="field-nacionality"></select>
+                    </div>
+                    <div class="form-group">
+                      <label for="field-previous-qualification">Previous Qualification</label>
+                      <select id="field-previous-qualification"></select>
+                    </div>
+                    <div class="form-group">
+                      <label for="field-mother-s-qualification">Mother's Qualification</label>
+                      <select id="field-mother-s-qualification"></select>
+                    </div>
+                    <div class="form-group">
+                      <label for="field-father-s-qualification">Father's Qualification</label>
+                      <select id="field-father-s-qualification"></select>
+                    </div>
+                    <div class="form-group">
+                      <label for="field-mother-s-occupation">Mother's Occupation</label>
+                      <select id="field-mother-s-occupation"></select>
+                    </div>
+                    <div class="form-group">
+                      <label for="field-father-s-occupation">Father's Occupation</label>
+                      <select id="field-father-s-occupation"></select>
+                    </div>
+                    <div class="form-group">
+                      <label for="field-unemployment-rate">Macro: Unemployment Rate (%)</label>
+                      <input type="number" id="field-unemployment-rate" step="0.1" value="10.8">
+                    </div>
+                    <div class="form-group">
+                      <label for="field-inflation-rate">Macro: Inflation Rate (%)</label>
+                      <input type="number" id="field-inflation-rate" step="0.1" value="1.4">
+                    </div>
+                    <div class="form-group">
+                      <label for="field-gdp">Macro: GDP Growth (%)</label>
+                      <input type="number" id="field-gdp" step="0.01" value="1.74">
+                    </div>
+                  </div>
+                </div>
+
+                <!-- Stage 2 Section: Semester 1 Outcomes -->
+                <div class="card" id="stage2-card">
+                  <div class="card-header">
+                    <label class="switch-label">
+                      <span class="toggle-switch">
+                        <input type="checkbox" id="toggle-s1">
+                        <span class="toggle-slider"></span>
+                      </span>
+                      <span class="card-title">2. Semester 1 Performance</span>
+                    </label>
+                    <span id="badge-s1" class="badge badge-unlock">Unlocks Stage 2</span>
+                  </div>
+                  <div id="s1-fields" class="form-grid hidden">
+                    <div class="form-group">
+                      <label for="field-s1-enrolled">Enrolled Units (1st Sem)</label>
+                      <input type="number" id="field-s1-enrolled" min="0" value="6">
+                    </div>
+                    <div class="form-group">
+                      <label for="field-s1-approved">Approved Units (1st Sem)</label>
+                      <input type="number" id="field-s1-approved" min="0" value="5">
+                    </div>
+                    <div class="form-group">
+                      <label for="field-s1-evaluations">Evaluations Completed</label>
+                      <input type="number" id="field-s1-evaluations" min="0" value="7">
+                    </div>
+                    <div class="form-group">
+                      <label for="field-s1-grade">Average Grade <span class="hint">(0-20)</span></label>
+                      <input type="number" id="field-s1-grade" step="0.1" min="0" max="20" value="12.5">
+                    </div>
+                    <div class="form-group">
+                      <label for="field-s1-credited">Credited Units</label>
+                      <input type="number" id="field-s1-credited" min="0" value="0">
+                    </div>
+                    <div class="form-group">
+                      <label for="field-s1-noeval">Units Without Evaluation</label>
+                      <input type="number" id="field-s1-noeval" min="0" value="0">
+                    </div>
+                  </div>
+                </div>
+
+                <!-- Stage 3 Section: Semester 2 Outcomes -->
+                <div class="card" id="stage3-card">
+                  <div class="card-header">
+                    <label class="switch-label">
+                      <span class="toggle-switch">
+                        <input type="checkbox" id="toggle-s2">
+                        <span class="toggle-slider"></span>
+                      </span>
+                      <span class="card-title">3. Semester 2 Performance</span>
+                    </label>
+                    <span id="badge-s2" class="badge badge-unlock">Unlocks Stage 3</span>
+                  </div>
+                  <div id="s2-fields" class="form-grid hidden">
+                    <div class="form-group">
+                      <label for="field-s2-enrolled">Enrolled Units (2nd Sem)</label>
+                      <input type="number" id="field-s2-enrolled" min="0" value="6">
+                    </div>
+                    <div class="form-group">
+                      <label for="field-s2-approved">Approved Units (2nd Sem)</label>
+                      <input type="number" id="field-s2-approved" min="0" value="5">
+                    </div>
+                    <div class="form-group">
+                      <label for="field-s2-evaluations">Evaluations Completed</label>
+                      <input type="number" id="field-s2-evaluations" min="0" value="7">
+                    </div>
+                    <div class="form-group">
+                      <label for="field-s2-grade">Average Grade <span class="hint">(0-20)</span></label>
+                      <input type="number" id="field-s2-grade" step="0.1" min="0" max="20" value="13.0">
+                    </div>
+                    <div class="form-group">
+                      <label for="field-s2-credited">Credited Units</label>
+                      <input type="number" id="field-s2-credited" min="0" value="0">
+                    </div>
+                    <div class="form-group">
+                      <label for="field-s2-noeval">Units Without Evaluation</label>
+                      <input type="number" id="field-s2-noeval" min="0" value="0">
+                    </div>
+                  </div>
+                </div>
+
+                <!-- Action Button Bar matching Dribbble reference (Save and Continue / Reset) -->
+                <div class="form-actions-bar">
+                  <button type="button" class="btn-secondary" onclick="document.getElementById('preset-reset').click()" title="Reset to standard defaults">
+                    ← Reset
+                  </button>
+                  <button type="submit" id="submit-btn" class="btn-primary">
+                    <span id="btn-spinner" class="spinner hidden"></span>
+                    <span id="btn-text">Save and Run Risk Assessment</span>
+                  </button>
+                </div>
+              </form>
+            </div>
+
+            <!-- Right Column: Results & Explainability Findings -->
+            <div class="results-container" id="results-panel">
+              <div class="card result-card">
+                <div class="card-header">
+                  <span class="card-title">Risk Assessment</span>
+                  <span id="res-stage-used" class="badge badge-stage">Awaiting Input</span>
+                </div>
+
+                <!-- Placeholder state before first evaluation -->
+                <div id="results-placeholder" class="results-placeholder-content">
+                  <div class="results-placeholder-icon">📊</div>
+                  <h3 style="font-size: 1.05rem; font-weight: 700; margin-bottom: 6px;">Ready for Evaluation</h3>
+                  <p style="font-size: 0.85rem; line-height: 1.55; color: var(--text-muted);">
+                    Enter the student's admission and academic records on the left, or pick one of the <strong>Cohort Presets</strong> above to see instant early-warning predictions and TreeSHAP driver analysis.
+                  </p>
+                </div>
+
+                <!-- Active results panel -->
+                <div id="results-content" class="hidden">
+                  <!-- Metric KPI Cards matching reference design -->
+                  <div class="metrics-kpi-row">
+                    <div class="metric-kpi-card">
+                      <span class="kpi-title">Dropout Risk</span>
+                      <div class="kpi-value-row">
+                        <span id="val-dropout-kpi" class="kpi-number">--</span>
+                        <span id="val-dropout-trend" class="trend-pill trend-up">↑ Alert</span>
+                      </div>
+                    </div>
+                    <div class="metric-kpi-card">
+                      <span class="kpi-title">Enrolled Prob</span>
+                      <div class="kpi-value-row">
+                        <span id="val-enrolled-kpi" class="kpi-number">--</span>
+                      </div>
+                    </div>
+                    <div class="metric-kpi-card">
+                      <span class="kpi-title">Graduate Prob</span>
+                      <div class="kpi-value-row">
+                        <span id="val-graduate-kpi" class="kpi-number">--</span>
+                        <span id="val-graduate-trend" class="trend-pill trend-down">✓</span>
+                      </div>
+                    </div>
+                  </div>
+
+                  <!-- Prediction Hero Banner -->
+                  <div class="prediction-hero">
+                    <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 6px;">
+                      <span style="font-size: 0.74rem; color: var(--text-muted); font-weight: 700; text-transform: uppercase; letter-spacing: 0.05em;">Predicted Outcome</span>
+                      <span id="res-risk-level" class="risk-pill">Low Risk</span>
+                    </div>
+                    <div id="res-prediction" class="prediction-badge">--</div>
+                  </div>
+
+                  <!-- Probability Distribution Progress Bars -->
+                  <div class="prob-bar-container">
+                    <div class="prob-row">
+                      <span>Dropout Probability</span>
+                      <span id="val-dropout">0%</span>
+                    </div>
+                    <div class="progress">
+                      <div id="bar-dropout" class="progress-bar bar-dropout" style="width: 0%;"></div>
+                    </div>
+
+                    <div class="prob-row">
+                      <span>Enrolled Probability</span>
+                      <span id="val-enrolled">0%</span>
+                    </div>
+                    <div class="progress">
+                      <div id="bar-enrolled" class="progress-bar bar-enrolled" style="width: 0%;"></div>
+                    </div>
+
+                    <div class="prob-row">
+                      <span>Graduate Probability</span>
+                      <span id="val-graduate">0%</span>
+                    </div>
+                    <div class="progress">
+                      <div id="bar-graduate" class="progress-bar bar-graduate" style="width: 0%;"></div>
+                    </div>
+                  </div>
+
+                  <!-- SHAP Influencing Drivers -->
+                  <div style="margin-top: 16px;">
+                    <div class="section-subtitle">
+                      <span>🔍</span> Key Influencing Factors (TreeSHAP)
+                    </div>
+                    <ul id="res-factors" class="factors-list"></ul>
+                  </div>
+
+                  <!-- Advisor Recommendations -->
+                  <div class="actions-box">
+                    <div class="actions-box-title">
+                      <span>💡</span> Suggested Advisor Interventions
+                    </div>
+                    <ul id="res-actions"></ul>
+                  </div>
+
+                  <!-- Disclaimer -->
+                  <p class="disclaimer">
+                    Decision-support tool only. Relative risk bands, not calibrated probabilities. Not an automated administrative judgement.
+                  </p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </main>
+      </div>
+    </div>
+  </div>
+
+  <script src="/static/app.js"></script>
+</body>
+</html>

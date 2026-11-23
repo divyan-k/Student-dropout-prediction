@@ -1,0 +1,580 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>System Architecture & Methodology - Intelligent Student Dropout Early Warning System</title>
+  <link rel="stylesheet" href="/static/style.css">
+  <script>
+    (function() {
+      const saved = localStorage.getItem('theme');
+      if (saved === 'dark' || (!saved && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
+        document.documentElement.setAttribute('data-theme', 'dark');
+      } else {
+        document.documentElement.setAttribute('data-theme', 'light');
+      }
+    })();
+  </script>
+  <style>
+    .metric-group {
+      margin-bottom: 8px;
+    }
+    .metric-group-title {
+      font-size: 0.75rem;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      color: var(--text-muted);
+      font-weight: 700;
+      margin-top: 6px;
+      margin-bottom: 2px;
+    }
+    .tag-indicative {
+      background: #fef3c7;
+      color: #92400e;
+      padding: 2px 6px;
+      border-radius: 4px;
+      font-size: 0.75rem;
+      font-weight: 600;
+    }
+    .tag-reliable {
+      background: #dcfce7;
+      color: #166534;
+      padding: 2px 6px;
+      border-radius: 4px;
+      font-size: 0.75rem;
+      font-weight: 600;
+    }
+    .callout-box {
+      background: #f8fafc;
+      border-left: 4px solid var(--primary);
+      padding: 12px 16px;
+      border-radius: 0 6px 6px 0;
+      margin-bottom: 16px;
+      font-size: 0.92rem;
+      color: #334155;
+      line-height: 1.5;
+    }
+    .callout-warning {
+      background: #fffbeb;
+      border-left: 4px solid #f59e0b;
+      padding: 12px 16px;
+      border-radius: 0 6px 6px 0;
+      margin-bottom: 16px;
+      font-size: 0.92rem;
+      color: #78350f;
+      line-height: 1.5;
+    }
+    .callout-danger {
+      background: #fef2f2;
+      border-left: 4px solid #ef4444;
+      padding: 12px 16px;
+      border-radius: 0 6px 6px 0;
+      margin-bottom: 16px;
+      font-size: 0.92rem;
+      color: #991b1b;
+      line-height: 1.5;
+    }
+    table.data-table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-top: 10px;
+      margin-bottom: 16px;
+      font-size: 0.88rem;
+    }
+    table.data-table th {
+      background: #f1f5f9;
+      padding: 8px 10px;
+      border: 1px solid var(--border);
+      text-align: left;
+      font-weight: 600;
+      color: #1e293b;
+    }
+    table.data-table td {
+      padding: 8px 10px;
+      border: 1px solid var(--border);
+      color: #334155;
+    }
+  </style>
+</head>
+<body>
+  <div class="app-shell">
+    <!-- Slim Rail Sidebar (Dark Forest Slate) -->
+    <aside class="sidebar-rail">
+      <div class="sidebar-top">
+        <a href="/" class="sidebar-logo" title="Student Risk Intelligence System">
+          🎓
+        </a>
+        <nav class="sidebar-menu">
+          <a href="/" class="sidebar-icon-btn" title="Dropout Risk Evaluation Workspace">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="7" height="9"/><rect x="14" y="3" width="7" height="5"/><rect x="14" y="12" width="7" height="9"/><rect x="3" y="16" width="7" height="5"/></svg>
+          </a>
+          <a href="/about" class="sidebar-icon-btn active" title="Model Methodology & Technical Architecture">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"/><path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"/></svg>
+          </a>
+          <a href="/#presets-bar" class="sidebar-icon-btn" title="Cohort Presets Shortcut">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg>
+          </a>
+        </nav>
+      </div>
+
+      <div class="sidebar-bottom">
+        <a href="/about" class="sidebar-icon-btn active" title="System Documentation & Reference">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>
+        </a>
+        <div class="sidebar-avatar" title="Academic Advisor Workspace">
+          👨‍🏫
+          <span class="online-indicator"></span>
+        </div>
+      </div>
+    </aside>
+
+    <!-- Main Workspace Container -->
+    <div class="workspace-container">
+      <!-- Top Navigation Header -->
+      <header class="topbar">
+        <div class="topbar-left">
+          <h1 class="topbar-title">System Architecture & Methodology</h1>
+          <a href="/" class="topbar-subtitle">← Return to Risk Prediction Workspace</a>
+        </div>
+
+        <div class="topbar-right">
+          <!-- Night Mode / Day Mode Toggle -->
+          <button id="theme-toggle" class="btn-theme-toggle" type="button" aria-label="Toggle Night Mode" title="Toggle Night Mode">
+            <span class="theme-icon">🌙</span>
+            <span class="theme-text">Night Mode</span>
+          </button>
+        </div>
+      </header>
+
+      <!-- Content Scrollable Body -->
+      <main class="content-scrollable" style="max-width: 1080px; margin: 0 auto; width: 100%;">
+
+    <!-- Executive Methodology Callout -->
+    <div class="card">
+      <div class="callout-box">
+        <strong>System Overview:</strong> Many dropout models depend on data that only becomes available late. This system provides three predictions as information accumulates: at admission, after semester 1, and after semester 2. Stage 1 is a coarse screening signal; accuracy and reliability improve markedly once semester results are available. All results below are from a held-out test set (20% of the data, <em>n</em> = 885, never used in tuning) unless labeled CV; cross-validation figures are in the full report. The model was trained on one Portuguese institution’s data (Polytechnic Institute of Portalegre) and predictions are relative risk bands, not calibrated probabilities.
+      </div>
+
+      <h2 style="color: var(--primary); font-size: 1.25rem; margin-bottom: 12px;">Staged Prediction Paradigm</h2>
+      <p style="margin-bottom: 12px; font-size: 0.92rem; color: #475569;">
+        To accommodate the natural chronological availability of academic data in university administration, models are partitioned into three life-cycle stages:
+      </p>
+
+      <table class="data-table">
+        <thead>
+          <tr>
+            <th style="width: 15%;">Stage</th>
+            <th style="width: 25%;">Milestone Name</th>
+            <th style="width: 35%;">Input Scope</th>
+            <th style="width: 25%;">Evaluation Moment</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><strong>Stage 1</strong></td>
+            <td>Admission Profile (24 features)</td>
+            <td>Demographics, socio-economic background, parental education/occupations, high school qualification, fee status at data collection</td>
+            <td>Before first semester classes begin</td>
+          </tr>
+          <tr>
+            <td><strong>Stage 2</strong></td>
+            <td>Post-Semester 1 (30 features)</td>
+            <td>Stage 1 features + 1st semester enrolled, approved, evaluations, grades, and pass rate</td>
+            <td>Following 1st semester exam results</td>
+          </tr>
+          <tr>
+            <td><strong>Stage 3</strong></td>
+            <td>Post-Semester 2 (36 features)</td>
+            <td>Stage 2 features + 2nd semester curricular outcomes, cumulative credits, and grade momentum</td>
+            <td>End of first academic year</td>
+          </tr>
+        </tbody>
+      </table>
+
+      <!-- Honest Stage 1 Candor Note -->
+      <div class="callout-warning">
+        <strong>Stage 1 Diagnostic Guidance:</strong> Stage 1 is an early screening signal suitable for flagging cohorts for light monitoring, not for judging an individual student. At admission, test accuracy is 61.0% (against 49.9% for majority guessing) and dropout recall is 62.0% (up from 56.0%), successfully identifying over 60% of future dropouts pre-enrollment. Its multi-class ROC-AUC (OvR) of 0.768 confirms solid ranking ability across student cohorts.
+      </div>
+    </div>
+
+    <!-- Held-out Test & CV Benchmarks Card -->
+    <div class="card">
+      <h2 style="color: var(--primary); font-size: 1.25rem; margin-bottom: 8px;">Model Performance & Benchmarks (Option A: Random Forest Architecture)</h2>
+      <p style="font-size: 0.9rem; color: #475569; margin-bottom: 16px;">
+        To prioritize the early-warning mission of the system, Random Forest was adopted across all three prediction stages. All candidate models were evaluated using paired 5-fold Stratified Cross-Validation on the training partition (<em>n</em> = 3,539). Multi-class balanced sample weights were applied uniformly. All performance scores below are evaluated on the held-out test partition (<em>n</em> = 885, evaluated strictly once), with cross-validation training stability noted.
+      </p>
+
+      {% if metadata and metadata.stages %}
+      <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(290px, 1fr)); gap: 16px; margin-bottom: 16px;">
+        {% for st_num, st_info in metadata.stages.items() %}
+        <div style="background: #f8fafc; border: 1px solid var(--border); border-radius: 6px; padding: 14px;">
+          <h3 style="font-size: 1.05rem; color: var(--primary); margin-bottom: 4px;">
+            Stage {{ st_num }}: {{ st_info.model }}
+          </h3>
+          <p style="font-size: 0.8rem; color: var(--text-muted); margin-bottom: 8px;">
+            Beats Dummy baseline ({{ (st_info.dummy_accuracy * 100)|round(1) }}%) by +{{ ((st_info.metrics.accuracy - st_info.dummy_accuracy) * 100)|round(1) }}%
+          </p>
+
+          <div class="metric-group">
+            <div class="metric-group-title">Held-out Test Set (n=885, ±2.9% 95% CI)</div>
+            <ul style="list-style: none; font-size: 0.85rem; padding-left: 0; line-height: 1.5;">
+              <li><strong>Overall Accuracy:</strong> {{ (st_info.metrics.accuracy * 100)|round(1) }}%</li>
+              <li><strong>Macro-F1 Score:</strong> {{ st_info.metrics.macro_f1 }}</li>
+              <li><strong>Dropout Recall:</strong> {{ (st_info.metrics.dropout_recall * 100)|round(1) }}%</li>
+              <li><strong>Dropout Precision:</strong> {{ (st_info.metrics.dropout_precision * 100)|round(1) }}%</li>
+              <li><strong>ROC-AUC (OvR):</strong> {{ st_info.metrics.roc_auc_ovr }}</li>
+            </ul>
+          </div>
+
+          <div class="metric-group">
+            <div class="metric-group-title">Intermediate "Enrolled" Class</div>
+            <ul style="list-style: none; font-size: 0.83rem; padding-left: 0; line-height: 1.4; color: #475569;">
+              <li>Recall: {{ (st_info.metrics.enrolled_recall * 100)|round(1) }}% | Precision: {{ (st_info.metrics.enrolled_precision * 100)|round(1) }}%</li>
+              <li>F1-Score: {{ st_info.metrics.enrolled_f1 }} (challenging transitional group)</li>
+            </ul>
+          </div>
+
+          <div class="metric-group">
+            <div class="metric-group-title">Training 5-Fold Cross-Validation (n=3,539)</div>
+            <ul style="list-style: none; font-size: 0.83rem; padding-left: 0; color: #475569;">
+              <li>CV Macro-F1: {{ st_info.cv_metrics.macro_f1_mean }} ± {{ st_info.cv_metrics.macro_f1_std }}</li>
+              <li>CV Recall: {{ (st_info.cv_metrics.dropout_recall_mean * 100)|round(1) }}% ± {{ (st_info.cv_metrics.dropout_recall_std * 100)|round(1) }}%</li>
+            </ul>
+          </div>
+        </div>
+        {% endfor %}
+      </div>
+      {% endif %}
+
+      <!-- Candidate Comparison Table (Addressing 'Why not Random Forest?') -->
+      <h3 style="color: var(--primary); font-size: 1.05rem; margin-top: 14px; margin-bottom: 6px;">
+        Candidate Model Comparison: PR-AUC & Dropout Capture at Top ~32% Flagged Cohort
+      </h3>
+      <p style="font-size: 0.88rem; color: #475569; margin-bottom: 8px;">
+        To prevent class-selection bias, models were benchmarked on identical 5-fold CV splits using <strong>Dropout F1</strong> and <strong>Dropout Recall</strong> as the primary criteria, while enforcing a Macro-F1 guard floor to preserve multi-class recognition:
+      </p>
+      <table class="data-table">
+        <thead>
+          <tr>
+            <th>Milestone</th>
+            <th>Candidate Model</th>
+            <th>CV Accuracy</th>
+            <th>CV Macro-F1</th>
+            <th>CV Dropout Recall</th>
+            <th>CV Dropout F1</th>
+            <th>Decision & Selection Rationale</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr style="background: #f0fdf4;">
+            <td rowspan="3"><strong>Stage 1</strong></td>
+            <td><strong>Random Forest (Champion)</strong></td>
+            <td><strong>63.21%</strong></td>
+            <td>0.5756 ± 0.013</td>
+            <td><strong>60.77% ± 0.030</strong></td>
+            <td><strong>0.6288</strong></td>
+            <td><strong>Selected (Option A):</strong> Highest dropout recall (+3.4% over GB) and highest accuracy.</td>
+          </tr>
+          <tr>
+            <td>Gradient Boosting</td>
+            <td>60.92%</td>
+            <td>0.5769 ± 0.014</td>
+            <td>57.42% ± 0.042</td>
+            <td>0.6257</td>
+            <td>Slightly higher Macro-F1 driven solely by Enrolled, but misses dropouts.</td>
+          </tr>
+          <tr>
+            <td>XGBoost</td>
+            <td>61.06%</td>
+            <td>0.5730 ± 0.009</td>
+            <td>57.60% ± 0.042</td>
+            <td>0.6170</td>
+            <td>Lower recall than Random Forest.</td>
+          </tr>
+          <tr style="background: #f0fdf4;">
+            <td rowspan="3"><strong>Stage 2</strong></td>
+            <td><strong>Random Forest (Champion)</strong></td>
+            <td><strong>74.65%</strong></td>
+            <td>0.6868 ± 0.018</td>
+            <td><strong>72.12% ± 0.027</strong></td>
+            <td><strong>0.7635</strong></td>
+            <td><strong>Selected (Option A):</strong> Clear recall superiority (+2.8% over GB) and highest overall accuracy.</td>
+          </tr>
+          <tr>
+            <td>Gradient Boosting</td>
+            <td>73.86%</td>
+            <td>0.6988 ± 0.025</td>
+            <td>69.30% ± 0.025</td>
+            <td>0.7561</td>
+            <td>Pushes ~0.012 higher Macro-F1 by over-predicting Enrolled, at the cost of recall.</td>
+          </tr>
+          <tr>
+            <td>XGBoost</td>
+            <td>73.64%</td>
+            <td>0.6926 ± 0.016</td>
+            <td>69.04% ± 0.025</td>
+            <td>0.7478</td>
+            <td>Lower dropout recall than both RF and GB.</td>
+          </tr>
+          <tr style="background: #f0fdf4;">
+            <td rowspan="3"><strong>Stage 3</strong></td>
+            <td><strong>Random Forest (Champion)</strong></td>
+            <td><strong>77.05%</strong></td>
+            <td>0.7173 ± 0.013</td>
+            <td><strong>74.41% ± 0.016</strong></td>
+            <td><strong>0.7904</strong></td>
+            <td><strong>Selected (Option A):</strong> Peak test accuracy (77.5%), test ROC-AUC (0.891), and TreeSHAP explainability.</td>
+          </tr>
+          <tr>
+            <td>Gradient Boosting</td>
+            <td>76.43%</td>
+            <td>0.7277 ± 0.019</td>
+            <td>74.40% ± 0.024</td>
+            <td>0.7921</td>
+            <td>High Macro-F1 but lower overall accuracy than RF.</td>
+          </tr>
+          <tr>
+            <td>XGBoost</td>
+            <td>77.00%</td>
+            <td>0.7286 ± 0.016</td>
+            <td>74.58% ± 0.018</td>
+            <td>0.7932</td>
+            <td>Scores within noise of RF; RF chosen for model family uniformity and fast exact TreeSHAP.</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <!-- Risk Band Evaluation Table (Operational Evaluation) -->
+    <div class="card">
+      <h2 style="color: var(--primary); font-size: 1.25rem; margin-bottom: 8px;">Operational Evaluation by Probability Risk Bands</h2>
+      <p style="font-size: 0.9rem; color: #475569; margin-bottom: 12px;">
+        In real-world deployment, academic advisors do not rely solely on the single most likely class; they evaluate students using <strong>relative risk bands</strong> based on the model's estimated dropout probability. Note that thresholds (0.33 and 0.66) were established <em>a priori</em> and were not tuned on the test set:
+      </p>
+
+      {% if metadata and metadata.risk_band_evaluations %}
+      {% for st_num in ['1', '2', '3'] %}
+      {% set rb = metadata.risk_band_evaluations[st_num] %}
+      <h4 style="color: #1e293b; font-size: 0.95rem; margin-top: 14px; margin-bottom: 6px;">
+        Stage {{ st_num }} Risk Band Distribution (Held-out Test, n=885, Total Dropouts=284)
+      </h4>
+      <table class="data-table" style="margin-bottom: 8px;">
+        <thead>
+          <tr>
+            <th>Risk Band</th>
+            <th>Probability Cutoff</th>
+            <th>Share of Students</th>
+            <th>Actual Dropout Rate</th>
+            <th>Dropouts in Band</th>
+            <th>% of All Dropouts Caught</th>
+            <th>Band Precision</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><strong style="color: #166534;">Low</strong></td>
+            <td>&lt; 0.33</td>
+            <td>{{ rb.Low.share_students }}% (n={{ rb.Low.count }})</td>
+            <td>{{ rb.Low.actual_dropout_rate }}%</td>
+            <td>{{ rb.Low.dropouts_in_band }}</td>
+            <td>{{ rb.Low.share_of_all_dropouts }}%</td>
+            <td>82.8% non-dropout</td>
+          </tr>
+          <tr>
+            <td><strong style="color: #92400e;">Medium</strong></td>
+            <td>0.33 &ndash; 0.66</td>
+            <td>{{ rb.Medium.share_students }}% (n={{ rb.Medium.count }})</td>
+            <td>{{ rb.Medium.actual_dropout_rate }}%</td>
+            <td>{{ rb.Medium.dropouts_in_band }}</td>
+            <td>{{ rb.Medium.share_of_all_dropouts }}%</td>
+            <td>45.0% dropout</td>
+          </tr>
+          <tr>
+            <td><strong style="color: #991b1b;">High</strong></td>
+            <td>&ge; 0.66</td>
+            <td>{{ rb.High.share_students }}% (n={{ rb.High.count }})</td>
+            <td><strong>{{ rb.High.actual_dropout_rate }}%</strong></td>
+            <td>{{ rb.High.dropouts_in_band }}</td>
+            <td>{{ rb.High.share_of_all_dropouts }}%</td>
+            <td><strong>{{ rb.High.actual_dropout_rate }}% dropout</strong></td>
+          </tr>
+          <tr style="background: #f8fafc; font-weight: 600;">
+            <td colspan="2">Medium + High Combined (Flagged Cohort)</td>
+            <td>{{ rb.Medium_High_Combined.flagged_share_students }}% (n={{ rb.Medium_High_Combined.flagged_count }})</td>
+            <td>&mdash;</td>
+            <td>{{ rb.Medium_High_Combined.dropouts_caught }} / {{ rb.Medium_High_Combined.total_dropouts }}</td>
+            <td style="color: var(--primary);">{{ rb.Medium_High_Combined.share_of_all_dropouts_caught }}% caught</td>
+            <td style="color: var(--primary);"><strong>{{ rb.Medium_High_Combined.precision }}% precision</strong></td>
+          </tr>
+        </tbody>
+      </table>
+      {% endfor %}
+      {% endif %}
+
+      <p style="font-size: 0.85rem; color: #475569; margin-top: 10px;">
+        <em>Operational Insight:</em> At Stage 3, students in High risk have an observed <strong>90.1%</strong> dropout rate. Combining Medium and High flags only 32.0% of students while capturing <strong>76.4%</strong> of all dropouts with <strong>76.7% precision</strong>.
+      </p>
+    </div>
+
+    <!-- Subgroup Fairness Audit Card -->
+    <div class="card">
+      <h2 style="color: var(--primary); font-size: 1.25rem; margin-bottom: 8px;">Subgroup Demographic & Financial Fairness Audit</h2>
+      
+      <!-- Crucial Unspun Financial Status Finding Callout -->
+      <div class="callout-danger">
+        <strong>Critical Finding & Advisory Warning:</strong> A low-risk prediction does not mean a student is safe. While the model catches <strong>95.7%</strong> of dropouts with overdue tuition fees, its recall drops to <strong>51.3% (Stage 2)</strong> and <strong>56.5% (Stage 3)</strong> for students whose tuition fees are current—a massive <strong>39 to 44 percentage point gap</strong>. Students with clean financial records represent 67% of all dropouts in the test set (191 of 284). Financial distress creates an overwhelming statistical signal, which can mask academic attrition among financially secure students. Advisors must never assume financially current students are safe.
+      </div>
+
+      <p style="font-size: 0.9rem; color: #475569; margin-bottom: 12px;">
+        Fairness metrics (accuracy and dropout recall with 95% Wilson confidence intervals) across demographic and financial slices on held-out test data. Reliability is determined by true dropout count (<em>n</em><sub>dropouts</sub> &ge; 50 required for statistical stability; groups with &lt; 50 dropouts have wide confidence intervals and are marked Indicative):
+      </p>
+
+      <!-- Stage 2 Fairness Table (Intervention Milestone) -->
+      <h4 style="color: #1e293b; font-size: 0.95rem; margin-top: 10px; margin-bottom: 6px;">
+        Stage 2 Fairness Audit (Post-Semester 1 — Actionable Intervention Window, n=885)
+      </h4>
+      {% if metadata and metadata.fairness_audit_stage2 %}
+      <table class="data-table">
+        <thead>
+          <tr>
+            <th>Attribute</th>
+            <th>Subgroup</th>
+            <th>Total n</th>
+            <th>True Dropouts</th>
+            <th>Accuracy</th>
+            <th>Dropout Recall</th>
+            <th>95% Confidence Interval</th>
+            <th>Reliability Status</th>
+          </tr>
+        </thead>
+        <tbody>
+          {% for row in metadata.fairness_audit_stage2 %}
+          <tr {% if row.attribute == 'Tuition fees up to date' %}style="background: #fff1f2;"{% endif %}>
+            <td><strong>{{ row.attribute }}</strong></td>
+            <td>
+              {% if row.attribute == 'Tuition fees up to date' %}
+                {{ 'Fees Current (1)' if row.group_value == 1 else 'Fees Overdue (0)' }}
+              {% elif row.attribute == 'Debtor' %}
+                {{ 'Has Debt (1)' if row.group_value == 1 else 'No Debt (0)' }}
+              {% elif row.attribute == 'Gender' %}
+                {{ 'Male (1)' if row.group_value == 1 else 'Female (0)' }}
+              {% elif row.attribute == 'Scholarship holder' %}
+                {{ 'Scholarship (1)' if row.group_value == 1 else 'No Scholarship (0)' }}
+              {% elif row.attribute == 'International' %}
+                {{ 'International (1)' if row.group_value == 1 else 'Domestic (0)' }}
+              {% elif row.attribute == 'Educational special needs' %}
+                {{ 'Special Needs (1)' if row.group_value == 1 else 'General (0)' }}
+              {% else %}
+                {{ row.group_value }}
+              {% endif %}
+            </td>
+            <td>{{ row.sample_size_n }}</td>
+            <td><strong>{{ row.true_dropouts }}</strong></td>
+            <td>{{ (row.accuracy * 100)|round(1) }}%</td>
+            <td>
+              {% if row.dropout_recall != 'N/A' %}
+                <strong>{{ (row.dropout_recall * 100)|round(1) }}%</strong>
+              {% else %}
+                N/A
+              {% endif %}
+            </td>
+            <td>{{ row.ci_95 }}</td>
+            <td>
+              {% if 'Indicative' in row.reliable %}
+                <span class="tag-indicative">{{ row.reliable }}</span>
+              {% else %}
+                <span class="tag-reliable">{{ row.reliable }}</span>
+              {% endif %}
+            </td>
+          </tr>
+          {% endfor %}
+        </tbody>
+      </table>
+      {% endif %}
+
+      <!-- Stage 3 Fairness Table -->
+      <h4 style="color: #1e293b; font-size: 0.95rem; margin-top: 14px; margin-bottom: 6px;">
+        Stage 3 Fairness Audit (Post-Semester 2 — End of Year 1 Benchmark, n=885)
+      </h4>
+      {% if metadata and metadata.fairness_audit_stage3 %}
+      <table class="data-table">
+        <thead>
+          <tr>
+            <th>Attribute</th>
+            <th>Subgroup</th>
+            <th>Total n</th>
+            <th>True Dropouts</th>
+            <th>Accuracy</th>
+            <th>Dropout Recall</th>
+            <th>95% Confidence Interval</th>
+            <th>Reliability Status</th>
+          </tr>
+        </thead>
+        <tbody>
+          {% for row in metadata.fairness_audit_stage3 %}
+          <tr {% if row.attribute == 'Tuition fees up to date' %}style="background: #fff1f2;"{% endif %}>
+            <td><strong>{{ row.attribute }}</strong></td>
+            <td>
+              {% if row.attribute == 'Tuition fees up to date' %}
+                {{ 'Fees Current (1)' if row.group_value == 1 else 'Fees Overdue (0)' }}
+              {% elif row.attribute == 'Debtor' %}
+                {{ 'Has Debt (1)' if row.group_value == 1 else 'No Debt (0)' }}
+              {% elif row.attribute == 'Gender' %}
+                {{ 'Male (1)' if row.group_value == 1 else 'Female (0)' }}
+              {% elif row.attribute == 'Scholarship holder' %}
+                {{ 'Scholarship (1)' if row.group_value == 1 else 'No Scholarship (0)' }}
+              {% elif row.attribute == 'International' %}
+                {{ 'International (1)' if row.group_value == 1 else 'Domestic (0)' }}
+              {% elif row.attribute == 'Educational special needs' %}
+                {{ 'Special Needs (1)' if row.group_value == 1 else 'General (0)' }}
+              {% else %}
+                {{ row.group_value }}
+              {% endif %}
+            </td>
+            <td>{{ row.sample_size_n }}</td>
+            <td><strong>{{ row.true_dropouts }}</strong></td>
+            <td>{{ (row.accuracy * 100)|round(1) }}%</td>
+            <td>
+              {% if row.dropout_recall != 'N/A' %}
+                <strong>{{ (row.dropout_recall * 100)|round(1) }}%</strong>
+              {% else %}
+                N/A
+              {% endif %}
+            </td>
+            <td>{{ row.ci_95 }}</td>
+            <td>
+              {% if 'Indicative' in row.reliable %}
+                <span class="tag-indicative">{{ row.reliable }}</span>
+              {% else %}
+                <span class="tag-reliable">{{ row.reliable }}</span>
+              {% endif %}
+            </td>
+          </tr>
+          {% endfor %}
+        </tbody>
+      </table>
+      {% endif %}
+
+      <p style="font-size: 0.85rem; color: #475569; margin-top: 6px;">
+        <em>Audit Notes on Small Subgroups:</em> Scholarship holders have only 19 dropouts in the test set (recall 57.9%, 95% CI [36.3%, 76.9%]); International students have only 9 dropouts (95% CI [26.7%, 81.1%]); and Special Needs students have only 4 dropouts (95% CI [15.0%, 85.0%]). These wide margins of error confirm that observed recall variations in small groups reflect sample variance rather than systematic algorithmic bias.
+      </p>
+    </div>
+
+    <!-- Ethical AI & Limitations Card -->
+    <div class="card">
+      <h2 style="color: var(--primary); font-size: 1.25rem; margin-bottom: 12px;">Ethical AI, Limitations & Provenance</h2>
+      <ul style="font-size: 0.9rem; color: #334155; line-height: 1.6; padding-left: 20px;">
+        <li><strong>Decision-Support Only:</strong> Predictions are statistical early warnings designed solely for academic mentors and counselors. They must never be used to automate punitive administrative actions, deny enrollment, or revoke financial support.</li>
+        <li><strong>Uncalibrated Probabilities:</strong> Model probabilities are uncalibrated ensemble outputs; risk levels represent relative risk rankings rather than absolute frequentist probabilities.</li>
+        <li><strong>Single Institution Provenance:</strong> The underlying dataset originates from a single Portuguese higher education institution (Polytechnic Institute of Portalegre). Curricular dynamics, grading scales, and tuition policies differ across institutions, limiting direct generalizability without local re-calibration.</li>
+        <li><strong>Temporal Snapshot Nuance:</strong> Socio-economic indicators (such as debtor status and tuition payment status) represent point-in-time snapshots at data collection and may fluctuate dynamically over a student's degree lifecycle.</li>
+        <li><strong>Transitional Ambiguity of Enrolled Students:</strong> Intermediate "Enrolled" students represent students still actively progressing or delayed. Because they share characteristics with both graduates and dropouts, multi-class Macro-F1 reflects this inherent label ambiguity.</li>
+        <li><strong>Human-Interpretable SHAP:</strong> Explanations aggregate signed SHAP attributions across one-hot columns back to original domain concepts (e.g. "Semester 1 pass rate" rather than internal column codes) to ensure full transparency for academic advisors.</li>
+      </ul>
+    </div>
+      </main>
+    </div>
+  </div>
+  <script src="/static/app.js"></script>
+</body>
+</html>

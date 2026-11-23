@@ -1,0 +1,38 @@
+﻿Attribute Name (sorted ascending),Role,Type,Description,Units,Missing Values
+Admission grade,Feature,Continuous,Student's admission grade (documented scale: 0 to 200).,Grade points,No
+Age at enrollment,Feature,Discrete,Student's age when enrolling in the programme.,Years,No
+Application mode,Feature,Discrete,Code representing the route or mode through which the student applied.,Category code,No
+Application order,Feature,Discrete,Preference order of the application; lower values indicate a higher choice preference.,Order code,No
+Course,Feature,Discrete,Code identifying the student's degree programme or course.,Category code,No
+Curricular units 1st sem (approved),Feature,Discrete,Number of first-semester curricular units passed/approved.,Units,No
+Curricular units 1st sem (credited),Feature,Discrete,Number of first-semester curricular units credited.,Units,No
+Curricular units 1st sem (enrolled),Feature,Discrete,Number of curricular units in which the student enrolled in the first semester.,Units,No
+Curricular units 1st sem (evaluations),Feature,Discrete,Number of first-semester curricular-unit evaluations.,Evaluations,No
+Curricular units 1st sem (grade),Feature,Continuous,Average grade for the first semester (documented scale: 0 to 20).,Grade points,No
+Curricular units 1st sem (without evaluations),Feature,Discrete,Number of first-semester curricular units with no evaluation.,Units,No
+Curricular units 2nd sem (approved),Feature,Discrete,Number of second-semester curricular units passed/approved.,Units,No
+Curricular units 2nd sem (credited),Feature,Discrete,Number of second-semester curricular units credited.,Units,No
+Curricular units 2nd sem (enrolled),Feature,Discrete,Number of curricular units in which the student enrolled in the second semester.,Units,No
+Curricular units 2nd sem (evaluations),Feature,Discrete,Number of second-semester curricular-unit evaluations.,Evaluations,No
+Curricular units 2nd sem (grade),Feature,Continuous,Average grade for the second semester (documented scale: 0 to 20).,Grade points,No
+Curricular units 2nd sem (without evaluations),Feature,Discrete,Number of second-semester curricular units with no evaluation.,Units,No
+Daytime/evening attendance,Feature,Binary,Indicates whether the student attends daytime or evening classes.,Category code,No
+Debtor,Feature,Binary,Indicates whether the student has outstanding debt.,0/1 code,No
+Displaced,Feature,Binary,Indicates whether the student lives away from their usual home area for study.,0/1 code,No
+Educational special needs,Feature,Binary,Indicates whether the student has declared special educational needs.,0/1 code,No
+Father's occupation,Feature,Discrete,Code representing the father's occupation.,Occupation code,No
+Father's qualification,Feature,Discrete,Code for the father's highest educational qualification.,Category code,No
+GDP,Feature,Continuous,Gross domestic product indicator for the relevant period represented in the dataset.,Dataset value,No
+Gender,Feature,Binary,"Student's gender, represented by a coded value.",Category code,No
+Inflation rate,Feature,Continuous,Inflation rate for the relevant period represented in the dataset.,Percent,No
+International,Feature,Binary,Indicates whether the student is classified as an international student.,0/1 code,No
+Marital Status,Feature,Discrete,"Student's marital-status category, represented by a coded value.",Category code,No
+Mother's occupation,Feature,Discrete,Code representing the mother's occupation.,Occupation code,No
+Mother's qualification,Feature,Discrete,Code for the mother's highest educational qualification.,Category code,No
+Nacionality,Feature,Discrete,Code representing the student's nationality.,Category code,No
+Previous qualification,Feature,Discrete,Code for the student's highest previous educational qualification.,Category code,No
+Previous qualification (grade),Feature,Continuous,Grade obtained in the student's previous qualification.,Grade points,No
+Scholarship holder,Feature,Binary,Indicates whether the student is a scholarship holder.,0/1 code,No
+target,Target,Categorical,"Outcome label to predict: Dropout, Graduate, or Enrolled.",Class label,No
+Tuition fees up to date,Feature,Binary,Indicates whether tuition fees are up to date.,0/1 code,No
+Unemployment rate,Feature,Continuous,Unemployment rate for the relevant period represented in the dataset.,Percent,No

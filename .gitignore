@@ -1,0 +1,36 @@
+# Virtual environments
+.venv/
+venv/
+env/
+
+# Python cache
+__pycache__/
+*.pyc
+
+# Jupyter
+.ipynb_checkpoints/
+
+# Environment variables
+.env
+.env.*
+
+# IDE
+.vscode/
+.idea/
+
+# Generated models
+models/*.joblib
+
+# Generated images
+*.png
+*.jpeg
+*.jpg
+
+# Generated reports and presentations
+reports/
+
+# Report generation scripts
+scripts/generate_*.py
+
+# Temporary files
+*.log

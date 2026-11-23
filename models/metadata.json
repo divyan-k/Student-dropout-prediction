@@ -1,0 +1,1116 @@
+{
+  "version": "2.0.0",
+  "champion_family": "RandomForest",
+  "trained_on": "2026-11-20 10:54:52",
+  "sklearn_version": "1.5.2",
+  "shap_version": "0.51.0",
+  "classes": [
+    "Dropout",
+    "Enrolled",
+    "Graduate"
+  ],
+  "stages": {
+    "1": {
+      "name": "Stage 1 (Admission)",
+      "model": "RandomForest",
+      "best_params": {
+        "classifier__n_estimators": 250,
+        "classifier__max_depth": 14,
+        "classifier__min_samples_leaf": 1,
+        "classifier__criterion": "entropy"
+      },
+      "features": [
+        "Marital Status",
+        "Application mode",
+        "Course",
+        "Previous qualification",
+        "Nacionality",
+        "Mother's qualification",
+        "Father's qualification",
+        "Application order",
+        "Previous qualification (grade)",
+        "Admission grade",
+        "Age at enrollment",
+        "Unemployment rate",
+        "Inflation rate",
+        "GDP",
+        "Daytime/evening attendance",
+        "Displaced",
+        "Educational special needs",
+        "Debtor",
+        "Tuition fees up to date",
+        "Gender",
+        "Scholarship holder",
+        "International",
+        "mother_occupation_group",
+        "father_occupation_group"
+      ],
+      "metrics": {
+        "accuracy": 0.6102,
+        "macro_f1": 0.545,
+        "weighted_f1": 0.6072,
+        "dropout_recall": 0.6197,
+        "enrolled_recall": 0.2956,
+        "graduate_recall": 0.7172,
+        "dropout_precision": 0.6219,
+        "enrolled_precision": 0.3219,
+        "graduate_precision": 0.6952,
+        "dropout_f1": 0.6208,
+        "enrolled_f1": 0.3082,
+        "graduate_f1": 0.706,
+        "roc_auc_ovr": 0.7682
+      },
+      "cv_metrics": {
+        "macro_f1_mean": 0.5756,
+        "macro_f1_std": 0.0132,
+        "dropout_recall_mean": 0.6077,
+        "dropout_recall_std": 0.0301,
+        "dropout_f1_mean": 0.6288,
+        "dropout_f1_std": 0.016,
+        "accuracy_mean": 0.6321,
+        "accuracy_std": 0.0095
+      },
+      "macro_guard_floor": 0.52,
+      "dummy_accuracy": 0.4994
+    },
+    "2": {
+      "name": "Stage 2",
+      "model": "RandomForest",
+      "best_params": {
+        "classifier__n_estimators": 250,
+        "classifier__max_depth": 18,
+        "classifier__min_samples_leaf": 1,
+        "classifier__criterion": "entropy"
+      },
+      "features": [
+        "Marital Status",
+        "Application mode",
+        "Course",
+        "Previous qualification",
+        "Nacionality",
+        "Mother's qualification",
+        "Father's qualification",
+        "Application order",
+        "Previous qualification (grade)",
+        "Admission grade",
+        "Age at enrollment",
+        "Unemployment rate",
+        "Inflation rate",
+        "GDP",
+        "Daytime/evening attendance",
+        "Displaced",
+        "Educational special needs",
+        "Debtor",
+        "Tuition fees up to date",
+        "Gender",
+        "Scholarship holder",
+        "International",
+        "Curricular units 1st sem (credited)",
+        "Curricular units 1st sem (enrolled)",
+        "Curricular units 1st sem (evaluations)",
+        "Curricular units 1st sem (approved)",
+        "Curricular units 1st sem (grade)",
+        "Curricular units 1st sem (without evaluations)",
+        "mother_occupation_group",
+        "father_occupation_group",
+        "enrolled_zero_s1",
+        "approval_rate_s1"
+      ],
+      "metrics": {
+        "accuracy": 0.7435,
+        "macro_f1": 0.6554,
+        "weighted_f1": 0.7294,
+        "dropout_recall": 0.7077,
+        "enrolled_recall": 0.3208,
+        "graduate_recall": 0.9186,
+        "dropout_precision": 0.7761,
+        "enrolled_precision": 0.4554,
+        "graduate_precision": 0.7899,
+        "dropout_f1": 0.7403,
+        "enrolled_f1": 0.3764,
+        "graduate_f1": 0.8494,
+        "roc_auc_ovr": 0.8705
+      },
+      "cv_metrics": {
+        "macro_f1_mean": 0.6868,
+        "macro_f1_std": 0.018,
+        "dropout_recall_mean": 0.7212,
+        "dropout_recall_std": 0.0269,
+        "dropout_f1_mean": 0.7635,
+        "dropout_f1_std": 0.0261,
+        "accuracy_mean": 0.7465,
+        "accuracy_std": 0.0166
+      },
+      "macro_guard_floor": 0.65,
+      "dummy_accuracy": 0.4994
+    },
+    "3": {
+      "name": "Stage 3",
+      "model": "RandomForest",
+      "best_params": {
+        "classifier__n_estimators": 250,
+        "classifier__max_depth": 18,
+        "classifier__min_samples_leaf": 1,
+        "classifier__criterion": "entropy"
+      },
+      "features": [
+        "Marital Status",
+        "Application mode",
+        "Course",
+        "Previous qualification",
+        "Nacionality",
+        "Mother's qualification",
+        "Father's qualification",
+        "Application order",
+        "Previous qualification (grade)",
+        "Admission grade",
+        "Age at enrollment",
+        "Unemployment rate",
+        "Inflation rate",
+        "GDP",
+        "Daytime/evening attendance",
+        "Displaced",
+        "Educational special needs",
+        "Debtor",
+        "Tuition fees up to date",
+        "Gender",
+        "Scholarship holder",
+        "International",
+        "Curricular units 1st sem (credited)",
+        "Curricular units 1st sem (enrolled)",
+        "Curricular units 1st sem (evaluations)",
+        "Curricular units 1st sem (approved)",
+        "Curricular units 1st sem (grade)",
+        "Curricular units 1st sem (without evaluations)",
+        "Curricular units 2nd sem (credited)",
+        "Curricular units 2nd sem (enrolled)",
+        "Curricular units 2nd sem (evaluations)",
+        "Curricular units 2nd sem (approved)",
+        "Curricular units 2nd sem (grade)",
+        "Curricular units 2nd sem (without evaluations)",
+        "mother_occupation_group",
+        "father_occupation_group",
+        "enrolled_zero_s1",
+        "approval_rate_s1",
+        "enrolled_zero_s2",
+        "approval_rate_s2",
+        "grade_change",
+        "total_approved"
+      ],
+      "metrics": {
+        "accuracy": 0.7751,
+        "macro_f1": 0.6998,
+        "weighted_f1": 0.7634,
+        "dropout_recall": 0.757,
+        "enrolled_recall": 0.3836,
+        "graduate_recall": 0.9276,
+        "dropout_precision": 0.8269,
+        "enrolled_precision": 0.5446,
+        "graduate_precision": 0.7992,
+        "dropout_f1": 0.7904,
+        "enrolled_f1": 0.4502,
+        "graduate_f1": 0.8586,
+        "roc_auc_ovr": 0.8907
+      },
+      "cv_metrics": {
+        "macro_f1_mean": 0.7173,
+        "macro_f1_std": 0.0134,
+        "dropout_recall_mean": 0.7441,
+        "dropout_recall_std": 0.0162,
+        "dropout_f1_mean": 0.7904,
+        "dropout_f1_std": 0.0223,
+        "accuracy_mean": 0.7705,
+        "accuracy_std": 0.0093
+      },
+      "macro_guard_floor": 0.68,
+      "dummy_accuracy": 0.4994
+    }
+  },
+  "defaults": {
+    "Application order": 1.0,
+    "Unemployment rate": 11.1,
+    "Inflation rate": 1.4,
+    "GDP": 0.32,
+    "Displaced": 1,
+    "Educational special needs": 0,
+    "International": 0,
+    "Marital Status": 1,
+    "Nacionality": 1,
+    "Previous qualification": 1,
+    "Mother's qualification": 1,
+    "Father's qualification": 37,
+    "Daytime/evening attendance": 1
+  },
+  "non_defaultable_note": "Semester performance and core admission grades are never defaulted.",
+  "candidate_cv_comparison": {
+    "1": [
+      {
+        "model_name": "LogisticRegression",
+        "accuracy_mean": 0.5976,
+        "accuracy_std": 0.0142,
+        "macro_f1": 0.5634,
+        "macro_f1_std": 0.0105,
+        "dropout_recall": 0.5777,
+        "dropout_recall_std": 0.0452,
+        "dropout_f1": 0.6139,
+        "dropout_f1_std": 0.021,
+        "dropout_precision": 0.6584
+      },
+      {
+        "model_name": "DecisionTree",
+        "accuracy_mean": 0.512,
+        "accuracy_std": 0.0175,
+        "macro_f1": 0.5046,
+        "macro_f1_std": 0.0187,
+        "dropout_recall": 0.4529,
+        "dropout_recall_std": 0.0401,
+        "dropout_f1": 0.5431,
+        "dropout_f1_std": 0.0281,
+        "dropout_precision": 0.6871
+      },
+      {
+        "model_name": "RandomForest",
+        "accuracy_mean": 0.6321,
+        "accuracy_std": 0.0095,
+        "macro_f1": 0.5756,
+        "macro_f1_std": 0.0132,
+        "dropout_recall": 0.6077,
+        "dropout_recall_std": 0.0301,
+        "dropout_f1": 0.6288,
+        "dropout_f1_std": 0.016,
+        "dropout_precision": 0.6528
+      },
+      {
+        "model_name": "GradientBoosting",
+        "accuracy_mean": 0.6092,
+        "accuracy_std": 0.0176,
+        "macro_f1": 0.5769,
+        "macro_f1_std": 0.0137,
+        "dropout_recall": 0.5742,
+        "dropout_recall_std": 0.0418,
+        "dropout_f1": 0.6257,
+        "dropout_f1_std": 0.0205,
+        "dropout_precision": 0.6912
+      },
+      {
+        "model_name": "XGBoost",
+        "accuracy_mean": 0.6219,
+        "accuracy_std": 0.0128,
+        "macro_f1": 0.5845,
+        "macro_f1_std": 0.0112,
+        "dropout_recall": 0.5743,
+        "dropout_recall_std": 0.0371,
+        "dropout_f1": 0.6231,
+        "dropout_f1_std": 0.0215,
+        "dropout_precision": 0.6833
+      }
+    ],
+    "2": [
+      {
+        "model_name": "LogisticRegression",
+        "accuracy_mean": 0.722,
+        "accuracy_std": 0.0183,
+        "macro_f1": 0.6806,
+        "macro_f1_std": 0.0162,
+        "dropout_recall": 0.7036,
+        "dropout_recall_std": 0.036,
+        "dropout_f1": 0.7477,
+        "dropout_f1_std": 0.0292,
+        "dropout_precision": 0.7985
+      },
+      {
+        "model_name": "DecisionTree",
+        "accuracy_mean": 0.6694,
+        "accuracy_std": 0.0173,
+        "macro_f1": 0.6329,
+        "macro_f1_std": 0.0107,
+        "dropout_recall": 0.6544,
+        "dropout_recall_std": 0.0632,
+        "dropout_f1": 0.7156,
+        "dropout_f1_std": 0.03,
+        "dropout_precision": 0.7976
+      },
+      {
+        "model_name": "RandomForest",
+        "accuracy_mean": 0.7465,
+        "accuracy_std": 0.0166,
+        "macro_f1": 0.6868,
+        "macro_f1_std": 0.018,
+        "dropout_recall": 0.7212,
+        "dropout_recall_std": 0.0269,
+        "dropout_f1": 0.7635,
+        "dropout_f1_std": 0.0261,
+        "dropout_precision": 0.8117
+      },
+      {
+        "model_name": "GradientBoosting",
+        "accuracy_mean": 0.7386,
+        "accuracy_std": 0.0209,
+        "macro_f1": 0.6988,
+        "macro_f1_std": 0.0249,
+        "dropout_recall": 0.693,
+        "dropout_recall_std": 0.0251,
+        "dropout_f1": 0.7561,
+        "dropout_f1_std": 0.0205,
+        "dropout_precision": 0.8322
+      },
+      {
+        "model_name": "XGBoost",
+        "accuracy_mean": 0.7383,
+        "accuracy_std": 0.0187,
+        "macro_f1": 0.6947,
+        "macro_f1_std": 0.0195,
+        "dropout_recall": 0.7071,
+        "dropout_recall_std": 0.03,
+        "dropout_f1": 0.7577,
+        "dropout_f1_std": 0.0262,
+        "dropout_precision": 0.817
+      }
+    ],
+    "3": [
+      {
+        "model_name": "LogisticRegression",
+        "accuracy_mean": 0.7553,
+        "accuracy_std": 0.013,
+        "macro_f1": 0.7134,
+        "macro_f1_std": 0.017,
+        "dropout_recall": 0.7431,
+        "dropout_recall_std": 0.0251,
+        "dropout_f1": 0.7802,
+        "dropout_f1_std": 0.0184,
+        "dropout_precision": 0.822
+      },
+      {
+        "model_name": "DecisionTree",
+        "accuracy_mean": 0.718,
+        "accuracy_std": 0.0197,
+        "macro_f1": 0.6853,
+        "macro_f1_std": 0.0169,
+        "dropout_recall": 0.686,
+        "dropout_recall_std": 0.0106,
+        "dropout_f1": 0.7584,
+        "dropout_f1_std": 0.0109,
+        "dropout_precision": 0.8484
+      },
+      {
+        "model_name": "RandomForest",
+        "accuracy_mean": 0.7705,
+        "accuracy_std": 0.0093,
+        "macro_f1": 0.7173,
+        "macro_f1_std": 0.0134,
+        "dropout_recall": 0.7441,
+        "dropout_recall_std": 0.0162,
+        "dropout_f1": 0.7904,
+        "dropout_f1_std": 0.0223,
+        "dropout_precision": 0.8432
+      },
+      {
+        "model_name": "GradientBoosting",
+        "accuracy_mean": 0.7643,
+        "accuracy_std": 0.0173,
+        "macro_f1": 0.7277,
+        "macro_f1_std": 0.0192,
+        "dropout_recall": 0.744,
+        "dropout_recall_std": 0.0236,
+        "dropout_f1": 0.7921,
+        "dropout_f1_std": 0.0234,
+        "dropout_precision": 0.847
+      },
+      {
+        "model_name": "XGBoost",
+        "accuracy_mean": 0.7703,
+        "accuracy_std": 0.0141,
+        "macro_f1": 0.7275,
+        "macro_f1_std": 0.0167,
+        "dropout_recall": 0.7476,
+        "dropout_recall_std": 0.0163,
+        "dropout_f1": 0.7925,
+        "dropout_f1_std": 0.0135,
+        "dropout_precision": 0.8437
+      }
+    ]
+  },
+  "risk_band_evaluations": {
+    "1": {
+      "Low": {
+        "share_students": 62.3,
+        "count": 551,
+        "actual_dropout_rate": 16.0,
+        "actual_dropout_rate_ci": [
+          13.1,
+          19.3
+        ],
+        "dropouts_in_band": 88,
+        "share_of_all_dropouts": 31.0
+      },
+      "Medium": {
+        "share_students": 28.5,
+        "count": 252,
+        "actual_dropout_rate": 47.2,
+        "actual_dropout_rate_ci": [
+          41.1,
+          53.4
+        ],
+        "dropouts_in_band": 119,
+        "share_of_all_dropouts": 41.9
+      },
+      "High": {
+        "share_students": 9.3,
+        "count": 82,
+        "actual_dropout_rate": 93.9,
+        "actual_dropout_rate_ci": [
+          86.5,
+          97.4
+        ],
+        "dropouts_in_band": 77,
+        "share_of_all_dropouts": 27.1
+      },
+      "Medium_High_Combined": {
+        "flagged_share_students": 37.7,
+        "flagged_count": 334,
+        "dropouts_caught": 196,
+        "total_dropouts": 284,
+        "share_of_all_dropouts_caught": 69.0,
+        "precision": 58.7,
+        "precision_ci": [
+          53.3,
+          63.8
+        ]
+      }
+    },
+    "2": {
+      "Low": {
+        "share_students": 63.5,
+        "count": 562,
+        "actual_dropout_rate": 10.0,
+        "actual_dropout_rate_ci": [
+          7.8,
+          12.7
+        ],
+        "dropouts_in_band": 56,
+        "share_of_all_dropouts": 19.7
+      },
+      "Medium": {
+        "share_students": 20.3,
+        "count": 180,
+        "actual_dropout_rate": 51.7,
+        "actual_dropout_rate_ci": [
+          44.4,
+          58.9
+        ],
+        "dropouts_in_band": 93,
+        "share_of_all_dropouts": 32.7
+      },
+      "High": {
+        "share_students": 16.2,
+        "count": 143,
+        "actual_dropout_rate": 94.4,
+        "actual_dropout_rate_ci": [
+          89.3,
+          97.1
+        ],
+        "dropouts_in_band": 135,
+        "share_of_all_dropouts": 47.5
+      },
+      "Medium_High_Combined": {
+        "flagged_share_students": 36.5,
+        "flagged_count": 323,
+        "dropouts_caught": 228,
+        "total_dropouts": 284,
+        "share_of_all_dropouts_caught": 80.3,
+        "precision": 70.6,
+        "precision_ci": [
+          65.4,
+          75.3
+        ]
+      }
+    },
+    "3": {
+      "Low": {
+        "share_students": 64.7,
+        "count": 573,
+        "actual_dropout_rate": 8.6,
+        "actual_dropout_rate_ci": [
+          6.5,
+          11.1
+        ],
+        "dropouts_in_band": 49,
+        "share_of_all_dropouts": 17.3
+      },
+      "Medium": {
+        "share_students": 16.0,
+        "count": 142,
+        "actual_dropout_rate": 52.1,
+        "actual_dropout_rate_ci": [
+          43.9,
+          60.2
+        ],
+        "dropouts_in_band": 74,
+        "share_of_all_dropouts": 26.1
+      },
+      "High": {
+        "share_students": 19.2,
+        "count": 170,
+        "actual_dropout_rate": 94.7,
+        "actual_dropout_rate_ci": [
+          90.2,
+          97.2
+        ],
+        "dropouts_in_band": 161,
+        "share_of_all_dropouts": 56.7
+      },
+      "Medium_High_Combined": {
+        "flagged_share_students": 35.3,
+        "flagged_count": 312,
+        "dropouts_caught": 235,
+        "total_dropouts": 284,
+        "share_of_all_dropouts_caught": 82.7,
+        "precision": 75.3,
+        "precision_ci": [
+          70.2,
+          79.8
+        ]
+      }
+    }
+  },
+  "fairness_audit_stage1": [
+    {
+      "attribute": "Tuition fees up to date",
+      "group_value": 0,
+      "sample_size_n": 109,
+      "true_dropouts": 93,
+      "dropouts_caught": 92,
+      "accuracy": 0.853,
+      "dropout_recall": 0.989,
+      "ci_95": "[94.2%, 99.8%]",
+      "reliable": "Reliable (n_dropouts >= 50)"
+    },
+    {
+      "attribute": "Tuition fees up to date",
+      "group_value": 1,
+      "sample_size_n": 776,
+      "true_dropouts": 191,
+      "dropouts_caught": 84,
+      "accuracy": 0.576,
+      "dropout_recall": 0.44,
+      "ci_95": "[37.1%, 51.1%]",
+      "reliable": "Reliable (n_dropouts >= 50)"
+    },
+    {
+      "attribute": "Debtor",
+      "group_value": 0,
+      "sample_size_n": 771,
+      "true_dropouts": 221,
+      "dropouts_caught": 118,
+      "accuracy": 0.593,
+      "dropout_recall": 0.534,
+      "ci_95": "[46.8%, 59.9%]",
+      "reliable": "Reliable (n_dropouts >= 50)"
+    },
+    {
+      "attribute": "Debtor",
+      "group_value": 1,
+      "sample_size_n": 114,
+      "true_dropouts": 63,
+      "dropouts_caught": 58,
+      "accuracy": 0.728,
+      "dropout_recall": 0.921,
+      "ci_95": "[82.7%, 96.6%]",
+      "reliable": "Reliable (n_dropouts >= 50)"
+    },
+    {
+      "attribute": "Gender",
+      "group_value": 0,
+      "sample_size_n": 570,
+      "true_dropouts": 139,
+      "dropouts_caught": 76,
+      "accuracy": 0.635,
+      "dropout_recall": 0.547,
+      "ci_95": "[46.4%, 62.7%]",
+      "reliable": "Reliable (n_dropouts >= 50)"
+    },
+    {
+      "attribute": "Gender",
+      "group_value": 1,
+      "sample_size_n": 315,
+      "true_dropouts": 145,
+      "dropouts_caught": 100,
+      "accuracy": 0.565,
+      "dropout_recall": 0.69,
+      "ci_95": "[61.0%, 75.9%]",
+      "reliable": "Reliable (n_dropouts >= 50)"
+    },
+    {
+      "attribute": "Scholarship holder",
+      "group_value": 0,
+      "sample_size_n": 680,
+      "true_dropouts": 265,
+      "dropouts_caught": 172,
+      "accuracy": 0.56,
+      "dropout_recall": 0.649,
+      "ci_95": "[59.0%, 70.4%]",
+      "reliable": "Reliable (n_dropouts >= 50)"
+    },
+    {
+      "attribute": "Scholarship holder",
+      "group_value": 1,
+      "sample_size_n": 205,
+      "true_dropouts": 19,
+      "dropouts_caught": 4,
+      "accuracy": 0.776,
+      "dropout_recall": 0.211,
+      "ci_95": "[8.5%, 43.3%]",
+      "reliable": "Indicative (n_dropouts=19 < 50)"
+    },
+    {
+      "attribute": "International",
+      "group_value": 0,
+      "sample_size_n": 861,
+      "true_dropouts": 275,
+      "dropouts_caught": 173,
+      "accuracy": 0.616,
+      "dropout_recall": 0.629,
+      "ci_95": "[57.1%, 68.4%]",
+      "reliable": "Reliable (n_dropouts >= 50)"
+    },
+    {
+      "attribute": "International",
+      "group_value": 1,
+      "sample_size_n": 24,
+      "true_dropouts": 9,
+      "dropouts_caught": 3,
+      "accuracy": 0.417,
+      "dropout_recall": 0.333,
+      "ci_95": "[12.1%, 64.6%]",
+      "reliable": "Indicative (n_dropouts=9 < 50)"
+    },
+    {
+      "attribute": "Educational special needs",
+      "group_value": 0,
+      "sample_size_n": 875,
+      "true_dropouts": 280,
+      "dropouts_caught": 174,
+      "accuracy": 0.611,
+      "dropout_recall": 0.621,
+      "ci_95": "[56.3%, 67.6%]",
+      "reliable": "Reliable (n_dropouts >= 50)"
+    },
+    {
+      "attribute": "Educational special needs",
+      "group_value": 1,
+      "sample_size_n": 10,
+      "true_dropouts": 4,
+      "dropouts_caught": 2,
+      "accuracy": 0.5,
+      "dropout_recall": 0.5,
+      "ci_95": "[15.0%, 85.0%]",
+      "reliable": "Indicative (n_dropouts=4 < 50)"
+    }
+  ],
+  "fairness_audit_stage2": [
+    {
+      "attribute": "Tuition fees up to date",
+      "group_value": 0,
+      "sample_size_n": 109,
+      "true_dropouts": 93,
+      "dropouts_caught": 90,
+      "accuracy": 0.899,
+      "dropout_recall": 0.968,
+      "ci_95": "[90.9%, 98.9%]",
+      "reliable": "Reliable (n_dropouts >= 50)"
+    },
+    {
+      "attribute": "Tuition fees up to date",
+      "group_value": 1,
+      "sample_size_n": 776,
+      "true_dropouts": 191,
+      "dropouts_caught": 111,
+      "accuracy": 0.722,
+      "dropout_recall": 0.581,
+      "ci_95": "[51.0%, 64.9%]",
+      "reliable": "Reliable (n_dropouts >= 50)"
+    },
+    {
+      "attribute": "Debtor",
+      "group_value": 0,
+      "sample_size_n": 771,
+      "true_dropouts": 221,
+      "dropouts_caught": 145,
+      "accuracy": 0.739,
+      "dropout_recall": 0.656,
+      "ci_95": "[59.1%, 71.6%]",
+      "reliable": "Reliable (n_dropouts >= 50)"
+    },
+    {
+      "attribute": "Debtor",
+      "group_value": 1,
+      "sample_size_n": 114,
+      "true_dropouts": 63,
+      "dropouts_caught": 56,
+      "accuracy": 0.772,
+      "dropout_recall": 0.889,
+      "ci_95": "[78.8%, 94.5%]",
+      "reliable": "Reliable (n_dropouts >= 50)"
+    },
+    {
+      "attribute": "Gender",
+      "group_value": 0,
+      "sample_size_n": 570,
+      "true_dropouts": 139,
+      "dropouts_caught": 92,
+      "accuracy": 0.758,
+      "dropout_recall": 0.662,
+      "ci_95": "[58.0%, 73.5%]",
+      "reliable": "Reliable (n_dropouts >= 50)"
+    },
+    {
+      "attribute": "Gender",
+      "group_value": 1,
+      "sample_size_n": 315,
+      "true_dropouts": 145,
+      "dropouts_caught": 109,
+      "accuracy": 0.717,
+      "dropout_recall": 0.752,
+      "ci_95": "[67.6%, 81.5%]",
+      "reliable": "Reliable (n_dropouts >= 50)"
+    },
+    {
+      "attribute": "Scholarship holder",
+      "group_value": 0,
+      "sample_size_n": 680,
+      "true_dropouts": 265,
+      "dropouts_caught": 193,
+      "accuracy": 0.716,
+      "dropout_recall": 0.728,
+      "ci_95": "[67.2%, 77.8%]",
+      "reliable": "Reliable (n_dropouts >= 50)"
+    },
+    {
+      "attribute": "Scholarship holder",
+      "group_value": 1,
+      "sample_size_n": 205,
+      "true_dropouts": 19,
+      "dropouts_caught": 8,
+      "accuracy": 0.834,
+      "dropout_recall": 0.421,
+      "ci_95": "[23.1%, 63.7%]",
+      "reliable": "Indicative (n_dropouts=19 < 50)"
+    },
+    {
+      "attribute": "International",
+      "group_value": 0,
+      "sample_size_n": 861,
+      "true_dropouts": 275,
+      "dropouts_caught": 196,
+      "accuracy": 0.746,
+      "dropout_recall": 0.713,
+      "ci_95": "[65.7%, 76.3%]",
+      "reliable": "Reliable (n_dropouts >= 50)"
+    },
+    {
+      "attribute": "International",
+      "group_value": 1,
+      "sample_size_n": 24,
+      "true_dropouts": 9,
+      "dropouts_caught": 5,
+      "accuracy": 0.667,
+      "dropout_recall": 0.556,
+      "ci_95": "[26.7%, 81.1%]",
+      "reliable": "Indicative (n_dropouts=9 < 50)"
+    },
+    {
+      "attribute": "Educational special needs",
+      "group_value": 0,
+      "sample_size_n": 875,
+      "true_dropouts": 280,
+      "dropouts_caught": 199,
+      "accuracy": 0.746,
+      "dropout_recall": 0.711,
+      "ci_95": "[65.5%, 76.1%]",
+      "reliable": "Reliable (n_dropouts >= 50)"
+    },
+    {
+      "attribute": "Educational special needs",
+      "group_value": 1,
+      "sample_size_n": 10,
+      "true_dropouts": 4,
+      "dropouts_caught": 2,
+      "accuracy": 0.5,
+      "dropout_recall": 0.5,
+      "ci_95": "[15.0%, 85.0%]",
+      "reliable": "Indicative (n_dropouts=4 < 50)"
+    }
+  ],
+  "fairness_audit_stage3": [
+    {
+      "attribute": "Tuition fees up to date",
+      "group_value": 0,
+      "sample_size_n": 109,
+      "true_dropouts": 93,
+      "dropouts_caught": 90,
+      "accuracy": 0.89,
+      "dropout_recall": 0.968,
+      "ci_95": "[90.9%, 98.9%]",
+      "reliable": "Reliable (n_dropouts >= 50)"
+    },
+    {
+      "attribute": "Tuition fees up to date",
+      "group_value": 1,
+      "sample_size_n": 776,
+      "true_dropouts": 191,
+      "dropouts_caught": 125,
+      "accuracy": 0.759,
+      "dropout_recall": 0.654,
+      "ci_95": "[58.5%, 71.8%]",
+      "reliable": "Reliable (n_dropouts >= 50)"
+    },
+    {
+      "attribute": "Debtor",
+      "group_value": 0,
+      "sample_size_n": 771,
+      "true_dropouts": 221,
+      "dropouts_caught": 159,
+      "accuracy": 0.777,
+      "dropout_recall": 0.719,
+      "ci_95": "[65.7%, 77.5%]",
+      "reliable": "Reliable (n_dropouts >= 50)"
+    },
+    {
+      "attribute": "Debtor",
+      "group_value": 1,
+      "sample_size_n": 114,
+      "true_dropouts": 63,
+      "dropouts_caught": 56,
+      "accuracy": 0.763,
+      "dropout_recall": 0.889,
+      "ci_95": "[78.8%, 94.5%]",
+      "reliable": "Reliable (n_dropouts >= 50)"
+    },
+    {
+      "attribute": "Gender",
+      "group_value": 0,
+      "sample_size_n": 570,
+      "true_dropouts": 139,
+      "dropouts_caught": 103,
+      "accuracy": 0.795,
+      "dropout_recall": 0.741,
+      "ci_95": "[66.2%, 80.7%]",
+      "reliable": "Reliable (n_dropouts >= 50)"
+    },
+    {
+      "attribute": "Gender",
+      "group_value": 1,
+      "sample_size_n": 315,
+      "true_dropouts": 145,
+      "dropouts_caught": 112,
+      "accuracy": 0.74,
+      "dropout_recall": 0.772,
+      "ci_95": "[69.8%, 83.3%]",
+      "reliable": "Reliable (n_dropouts >= 50)"
+    },
+    {
+      "attribute": "Scholarship holder",
+      "group_value": 0,
+      "sample_size_n": 680,
+      "true_dropouts": 265,
+      "dropouts_caught": 206,
+      "accuracy": 0.75,
+      "dropout_recall": 0.777,
+      "ci_95": "[72.4%, 82.3%]",
+      "reliable": "Reliable (n_dropouts >= 50)"
+    },
+    {
+      "attribute": "Scholarship holder",
+      "group_value": 1,
+      "sample_size_n": 205,
+      "true_dropouts": 19,
+      "dropouts_caught": 9,
+      "accuracy": 0.859,
+      "dropout_recall": 0.474,
+      "ci_95": "[27.3%, 68.3%]",
+      "reliable": "Indicative (n_dropouts=19 < 50)"
+    },
+    {
+      "attribute": "International",
+      "group_value": 0,
+      "sample_size_n": 861,
+      "true_dropouts": 275,
+      "dropouts_caught": 210,
+      "accuracy": 0.778,
+      "dropout_recall": 0.764,
+      "ci_95": "[71.0%, 81.0%]",
+      "reliable": "Reliable (n_dropouts >= 50)"
+    },
+    {
+      "attribute": "International",
+      "group_value": 1,
+      "sample_size_n": 24,
+      "true_dropouts": 9,
+      "dropouts_caught": 5,
+      "accuracy": 0.667,
+      "dropout_recall": 0.556,
+      "ci_95": "[26.7%, 81.1%]",
+      "reliable": "Indicative (n_dropouts=9 < 50)"
+    },
+    {
+      "attribute": "Educational special needs",
+      "group_value": 0,
+      "sample_size_n": 875,
+      "true_dropouts": 280,
+      "dropouts_caught": 213,
+      "accuracy": 0.776,
+      "dropout_recall": 0.761,
+      "ci_95": "[70.7%, 80.7%]",
+      "reliable": "Reliable (n_dropouts >= 50)"
+    },
+    {
+      "attribute": "Educational special needs",
+      "group_value": 1,
+      "sample_size_n": 10,
+      "true_dropouts": 4,
+      "dropouts_caught": 2,
+      "accuracy": 0.7,
+      "dropout_recall": 0.5,
+      "ci_95": "[15.0%, 85.0%]",
+      "reliable": "Indicative (n_dropouts=4 < 50)"
+    }
+  ],
+  "fairness_audit": [
+    {
+      "attribute": "Tuition fees up to date",
+      "group_value": 0,
+      "sample_size_n": 109,
+      "true_dropouts": 93,
+      "dropouts_caught": 90,
+      "accuracy": 0.89,
+      "dropout_recall": 0.968,
+      "ci_95": "[90.9%, 98.9%]",
+      "reliable": "Reliable (n_dropouts >= 50)"
+    },
+    {
+      "attribute": "Tuition fees up to date",
+      "group_value": 1,
+      "sample_size_n": 776,
+      "true_dropouts": 191,
+      "dropouts_caught": 125,
+      "accuracy": 0.759,
+      "dropout_recall": 0.654,
+      "ci_95": "[58.5%, 71.8%]",
+      "reliable": "Reliable (n_dropouts >= 50)"
+    },
+    {
+      "attribute": "Debtor",
+      "group_value": 0,
+      "sample_size_n": 771,
+      "true_dropouts": 221,
+      "dropouts_caught": 159,
+      "accuracy": 0.777,
+      "dropout_recall": 0.719,
+      "ci_95": "[65.7%, 77.5%]",
+      "reliable": "Reliable (n_dropouts >= 50)"
+    },
+    {
+      "attribute": "Debtor",
+      "group_value": 1,
+      "sample_size_n": 114,
+      "true_dropouts": 63,
+      "dropouts_caught": 56,
+      "accuracy": 0.763,
+      "dropout_recall": 0.889,
+      "ci_95": "[78.8%, 94.5%]",
+      "reliable": "Reliable (n_dropouts >= 50)"
+    },
+    {
+      "attribute": "Gender",
+      "group_value": 0,
+      "sample_size_n": 570,
+      "true_dropouts": 139,
+      "dropouts_caught": 103,
+      "accuracy": 0.795,
+      "dropout_recall": 0.741,
+      "ci_95": "[66.2%, 80.7%]",
+      "reliable": "Reliable (n_dropouts >= 50)"
+    },
+    {
+      "attribute": "Gender",
+      "group_value": 1,
+      "sample_size_n": 315,
+      "true_dropouts": 145,
+      "dropouts_caught": 112,
+      "accuracy": 0.74,
+      "dropout_recall": 0.772,
+      "ci_95": "[69.8%, 83.3%]",
+      "reliable": "Reliable (n_dropouts >= 50)"
+    },
+    {
+      "attribute": "Scholarship holder",
+      "group_value": 0,
+      "sample_size_n": 680,
+      "true_dropouts": 265,
+      "dropouts_caught": 206,
+      "accuracy": 0.75,
+      "dropout_recall": 0.777,
+      "ci_95": "[72.4%, 82.3%]",
+      "reliable": "Reliable (n_dropouts >= 50)"
+    },
+    {
+      "attribute": "Scholarship holder",
+      "group_value": 1,
+      "sample_size_n": 205,
+      "true_dropouts": 19,
+      "dropouts_caught": 9,
+      "accuracy": 0.859,
+      "dropout_recall": 0.474,
+      "ci_95": "[27.3%, 68.3%]",
+      "reliable": "Indicative (n_dropouts=19 < 50)"
+    },
+    {
+      "attribute": "International",
+      "group_value": 0,
+      "sample_size_n": 861,
+      "true_dropouts": 275,
+      "dropouts_caught": 210,
+      "accuracy": 0.778,
+      "dropout_recall": 0.764,
+      "ci_95": "[71.0%, 81.0%]",
+      "reliable": "Reliable (n_dropouts >= 50)"
+    },
+    {
+      "attribute": "International",
+      "group_value": 1,
+      "sample_size_n": 24,
+      "true_dropouts": 9,
+      "dropouts_caught": 5,
+      "accuracy": 0.667,
+      "dropout_recall": 0.556,
+      "ci_95": "[26.7%, 81.1%]",
+      "reliable": "Indicative (n_dropouts=9 < 50)"
+    },
+    {
+      "attribute": "Educational special needs",
+      "group_value": 0,
+      "sample_size_n": 875,
+      "true_dropouts": 280,
+      "dropouts_caught": 213,
+      "accuracy": 0.776,
+      "dropout_recall": 0.761,
+      "ci_95": "[70.7%, 80.7%]",
+      "reliable": "Reliable (n_dropouts >= 50)"
+    },
+    {
+      "attribute": "Educational special needs",
+      "group_value": 1,
+      "sample_size_n": 10,
+      "true_dropouts": 4,
+      "dropouts_caught": 2,
+      "accuracy": 0.7,
+      "dropout_recall": 0.5,
+      "ci_95": "[15.0%, 85.0%]",
+      "reliable": "Indicative (n_dropouts=4 < 50)"
+    }
+  ],
+  "model_selection_rationale": {
+    "architecture": "Option A: Standardized Random Forest at Every Stage",
+    "rationale": "The initial architecture selected champions strictly by Macro-F1. However, because Macro-F1 assigns equal weight to the transitional 'Enrolled' class (~18% of cohort), boosted models gained ~0.024 Macro-F1 only by predicting 'Enrolled' more aggressively, at the direct expense of dropping 4.5 to 4.8 percentage points of Dropout Recall. To align with the primary mission of early-warning dropout intervention, Option A adopts Random Forest across all three stages. Random Forest achieves the highest dropout recall and accuracy at Stages 1 and 2, matches XGBoost at Stage 3, provides direct TreeSHAP explainability, and simplifies deployment."
+  }
+}
